@@ -4,8 +4,33 @@
         <router-link :to="{name: 'About'}">About</router-link> |
         <router-link :to="{name: 'Jobs'}">Jobs</router-link>
     </nav>
+
+    <button @click="backward">Go back</button>
+    <button @click="redirect">Redirect</button>
+    <button @click="forward">Go Forward</button>
     <router-view/>
 </template>
+
+
+<script>
+    export default{
+        methods: {
+            //Going backward by one page
+            backward(){
+                this.$router.go(-1)
+            },
+            //Going forward by one page
+            forward(){
+                this.$router.go(1)
+            },
+            //Redirecting to the home page
+            redirect(){
+                this.$router.push({name: 'Home'})
+            }
+        }
+    }
+</script>
+
 
 <style>
     #app {
@@ -31,5 +56,12 @@
     nav a.router-link-exact-active {
         color: white;
         background: crimson;
+    }
+
+    button{
+        margin: 0 15px;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
     }
 </style>
