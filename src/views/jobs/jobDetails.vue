@@ -5,12 +5,13 @@
 
 <script>
     export default {
-        data(){
-            return{
-                //'this.$route.params' references the route parameter while ".id" is the name we gave the path in the router
-                id: this.$route.params.id
-            }
-        }
+        //Accepting the route parameter as a prop. This is from "params: {id: job.id}}"
+        props: ['id'],
+        //data(){
+        //    return{
+        //        id: this.$route.params.id
+        //    }
+        //}
     }
 </script>
 
