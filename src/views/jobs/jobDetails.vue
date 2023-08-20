@@ -1,7 +1,14 @@
 <template>
-    <h1>{{job.title}}</h1>
-    <p>The job id is {{ id }}</p>
-    <p>{{ job.details }}</p>
+    <!--To prevent null error-->
+    <div v-if="job">
+        <h1>{{job.title}}</h1>
+        <p>The job id is {{ id }}</p>
+        <p>{{ job.details }}</p>
+    </div>
+    <!--When we first open the page-->
+    <div v-else>
+        <p>Loading job details...</p>
+    </div>
 </template>
 
 <script>
@@ -15,7 +22,7 @@
         },
         //Fetching the details of each job
         mounted(){
-            fetch('http://localhost:3000/jobs' + this.id)
+            fetch('http://localhost:3000/jobs/' + this.id)
             //fetching the response
             .then((res)=> res.json())
             //fetching the actual data and populating the "jobs" property
