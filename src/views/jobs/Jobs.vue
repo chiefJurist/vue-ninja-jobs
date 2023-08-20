@@ -1,8 +1,6 @@
 <template>
     <h1>Jobs</h1>
     <div v-for="job in jobs" :key="job.id" class="job">
-        <!--The params object helps us navigate the specific job we want-->
-        <!--The name of our route parameter is "id " because that is what we called it when defining it in child component (JobDetails.vue)-->
         <router-link :to="{name: 'JobDetails', params: {id: job.id}}">
             <h2>{{ job.title }}</h2>
         </router-link>
@@ -10,15 +8,21 @@
 </template>
 
 <script>
+    //Here we fetch the data from the json server and populate the "jobs" property with it
     export default {
         data(){
             return{
-                jobs: [
-                    {title: "Ninja UX Designer", id: 1, details: "lorem"},
-                    {title: "Ninja Web Developer", id: 2, details: "lorem"},
-                    {title: "Ninja Vue designer", id: 3, details: "lorem"}
-                ]
+                jobs: []
             }
+        },
+        mounted(){
+            fetch('http://localhost:3000/jobs')
+            //fetching the response
+            .then((res)=> res.json())
+            //fetching the actual data and populating the "jobs" property
+            .then((data)=> this.jobs = data)
+            //catching errors
+            .catch(err => console.log(err.message))
         }
     }
 </script>
